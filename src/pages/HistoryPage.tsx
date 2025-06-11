@@ -6,6 +6,7 @@ import { Button } from '../components/ui/button';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { PlantIdentification } from '../types';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '../components/ui/dialog';
+import { Link } from 'react-router-dom';
 
 const HistoryPage = () => {
   const [history, setHistory] = useLocalStorage<PlantIdentification[]>('plant-history', []);
@@ -133,9 +134,9 @@ const HistoryPage = () => {
           <p className="text-muted-foreground mb-6">
             Your plant identification history will appear here once you identify some plants
           </p>
-          <Button href="/identify" asChild>
-            <a href="/identify">Identify a Plant</a>
-          </Button>
+          <Link to="/identify">
+            <Button>Identify a Plant</Button>
+          </Link>
         </div>
       )}
 
