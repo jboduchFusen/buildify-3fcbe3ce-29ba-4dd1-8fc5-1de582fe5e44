@@ -4,7 +4,6 @@ import { Camera, Upload, Loader2, X } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { toast } from 'sonner';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 import { PlantIdentification } from '../types';
 import { identifyPlant } from '../services/plantService';
 
@@ -14,7 +13,6 @@ const IdentificationPage = () => {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<PlantIdentification | null>(null);
   const [apiKey, setApiKey] = useState<string>('');
-  const [history, setHistory] = useLocalStorage<PlantIdentification[]>('plant-history', []);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,10 +76,6 @@ const IdentificationPage = () => {
     try {
       const identification = await identifyPlant(file, apiKey);
       setResult(identification);
-      
-      // Save to history
-      setHistory([identification, ...history.slice(0, 19)]);
-      
       toast.success('Plant identified successfully!');
     } catch (error) {
       console.error('Error identifying plant:', error);

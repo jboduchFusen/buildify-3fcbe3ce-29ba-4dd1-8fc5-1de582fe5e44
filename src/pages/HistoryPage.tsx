@@ -1,19 +1,38 @@
 
-import { useState } from 'react';
-import { Trash2, Search, Leaf } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Trash2, Search, Leaf, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 import { PlantIdentification } from '../types';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '../components/ui/dialog';
 import { Link } from 'react-router-dom';
+import { getPlantHistory, deletePlant } from '../services/plantService';
+import { toast } from 'sonner';
 
 const HistoryPage = () => {
-  const [history, setHistory] = useLocalStorage<PlantIdentification[]>('plant-history', []);
+  const [history, setHistory] = useState<PlantIdentification[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPlant, setSelectedPlant] = useState<PlantIdentification | null>(null);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadHistory();
+  }, []);
+
+  const loadHistory = async () => {
+    setLoading(true);
+    try {
+      const plants = await getPlantHistory();
+      setHistory(plants);
+    } catch (error) {
+      console.error('Error loading history:', error);
+      toast.error('Failed to load plant history');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredHistory = history.filter(
     (item) => 
@@ -21,24 +40,49 @@ const HistoryPage = () => {
       item.scientificName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleDelete = (index: number) => {
-    setDeleteIndex(index);
+  const handleDelete = (id: string) => {
+    setDeleteId(id);
     setShowDeleteDialog(true);
   };
 
-  const confirmDelete = () => {
-    if (deleteIndex !== null) {
-      const newHistory = [...history];
-      newHistory.splice(deleteIndex, 1);
-      setHistory(newHistory);
-      setShowDeleteDialog(false);
-      setDeleteIndex(null);
+  const confirmDelete = async () => {
+    if (deleteId) {
+      try {
+        await deletePlant(deleteId);
+        setHistory(history.filter(item => item.id !== deleteId));
+        toast.success('Plant deleted successfully');
+        setShowDeleteDialog(false);
+        setDeleteId(null);
+      } catch (error) {
+        console.error('Error deleting plant:', error);
+        toast.error('Failed to delete plant');
+      }
     }
   };
 
-  const clearAllHistory = () => {
-    setHistory([]);
+  const clearAllHistory = async () => {
+    try {
+      // Delete all plants one by one
+      for (const plant of history) {
+        await deletePlant(plant.id);
+      }
+      setHistory([]);
+      toast.success('All plants deleted successfully');
+      setShowDeleteDialog(false);
+    } catch (error) {
+      console.error('Error clearing history:', error);
+      toast.error('Failed to clear history');
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[50vh]">
+        <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
+        <p>Loading your plant history...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -54,7 +98,7 @@ const HistoryPage = () => {
           <Button 
             variant="destructive" 
             onClick={() => {
-              setDeleteIndex(null);
+              setDeleteId(null);
               setShowDeleteDialog(true);
             }}
           >
@@ -79,8 +123,8 @@ const HistoryPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredHistory.length > 0 ? (
-              filteredHistory.map((item, index) => (
-                <Card key={index} className="overflow-hidden">
+              filteredHistory.map((item) => (
+                <Card key={item.id} className="overflow-hidden">
                   <div className="relative h-48">
                     <img 
                       src={item.imageUrl} 
@@ -93,7 +137,7 @@ const HistoryPage = () => {
                       className="absolute top-2 right-2"
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleDelete(index);
+                        handleDelete(item.id);
                       }}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -197,10 +241,10 @@ const HistoryPage = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {deleteIndex !== null ? "Delete this identification?" : "Clear all history?"}
+              {deleteId ? "Delete this identification?" : "Clear all history?"}
             </DialogTitle>
             <DialogDescription>
-              {deleteIndex !== null 
+              {deleteId 
                 ? "This action cannot be undone. This identification will be permanently deleted from your history."
                 : "This action cannot be undone. All identifications will be permanently deleted from your history."
               }
@@ -212,9 +256,9 @@ const HistoryPage = () => {
             </Button>
             <Button 
               variant="destructive" 
-              onClick={deleteIndex !== null ? confirmDelete : clearAllHistory}
+              onClick={deleteId ? confirmDelete : clearAllHistory}
             >
-              {deleteIndex !== null ? "Delete" : "Clear All"}
+              {deleteId ? "Delete" : "Clear All"}
             </Button>
           </DialogFooter>
         </DialogContent>

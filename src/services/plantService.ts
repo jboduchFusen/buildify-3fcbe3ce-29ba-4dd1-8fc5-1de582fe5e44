@@ -1,5 +1,6 @@
 
 import { PlantIdentification } from '../types';
+import { supabase } from '../lib/supabase';
 
 export async function identifyPlant(file: File, apiKey: string): Promise<PlantIdentification> {
   try {
@@ -15,7 +16,32 @@ export async function identifyPlant(file: File, apiKey: string): Promise<PlantId
     // Create a mock response based on the image
     const mockResponse = createMockResponse(file.name);
     
-    // Create a plant identification object from the response
+    // Upload image to Supabase Storage
+    const user = supabase.auth.getUser();
+    if (!user) {
+      throw new Error('User not authenticated');
+    }
+    
+    // Generate a unique file name
+    const fileName = `${Date.now()}-${file.name}`;
+    const filePath = `plants/${fileName}`;
+    
+    // Upload to Supabase Storage
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from('plant-images')
+      .upload(filePath, file);
+      
+    if (uploadError) {
+      console.error('Error uploading image:', uploadError);
+      throw new Error('Failed to upload image');
+    }
+    
+    // Get the public URL for the uploaded image
+    const { data: { publicUrl } } = supabase.storage
+      .from('plant-images')
+      .getPublicUrl(filePath);
+    
+    // Create a plant identification object
     const identification: PlantIdentification = {
       id: generateId(),
       plantName: mockResponse.plantName,
@@ -23,14 +49,122 @@ export async function identifyPlant(file: File, apiKey: string): Promise<PlantId
       confidence: mockResponse.confidence,
       description: mockResponse.description,
       careInfo: mockResponse.careInfo,
-      imageUrl: base64Image,
+      imageUrl: publicUrl || base64Image, // Use public URL if available, otherwise fallback to base64
       timestamp: new Date().toISOString()
     };
+    
+    // Save to Supabase
+    const { data: userData } = await supabase.auth.getUser();
+    if (userData?.user) {
+      const { error: insertError } = await supabase
+        .from('plants')
+        .insert({
+          user_id: userData.user.id,
+          plant_name: identification.plantName,
+          scientific_name: identification.scientificName,
+          confidence: identification.confidence,
+          description: identification.description || null,
+          image_url: identification.imageUrl
+        });
+        
+      if (insertError) {
+        console.error('Error saving plant to database:', insertError);
+      }
+      
+      // If we have care info, save it as well
+      if (identification.careInfo && identification.careInfo.length > 0) {
+        // Get the plant ID we just inserted
+        const { data: plantData } = await supabase
+          .from('plants')
+          .select('id')
+          .eq('user_id', userData.user.id)
+          .order('created_at', { ascending: false })
+          .limit(1);
+          
+        if (plantData && plantData.length > 0) {
+          const plantId = plantData[0].id;
+          
+          // Insert care info
+          for (const info of identification.careInfo) {
+            await supabase
+              .from('care_info')
+              .insert({
+                plant_id: plantId,
+                info
+              });
+          }
+        }
+      }
+    }
     
     return identification;
   } catch (error) {
     console.error('Error identifying plant:', error);
     throw new Error('Failed to identify plant');
+  }
+}
+
+export async function getPlantHistory(): Promise<PlantIdentification[]> {
+  try {
+    const { data: userData } = await supabase.auth.getUser();
+    if (!userData?.user) {
+      return [];
+    }
+    
+    // Get plants from Supabase
+    const { data: plants, error } = await supabase
+      .from('plants')
+      .select(`
+        id,
+        plant_name,
+        scientific_name,
+        confidence,
+        description,
+        image_url,
+        created_at,
+        care_info (
+          info
+        )
+      `)
+      .eq('user_id', userData.user.id)
+      .order('created_at', { ascending: false });
+      
+    if (error) {
+      console.error('Error fetching plants:', error);
+      return [];
+    }
+    
+    // Convert to PlantIdentification format
+    return plants.map(plant => ({
+      id: plant.id,
+      plantName: plant.plant_name,
+      scientificName: plant.scientific_name,
+      confidence: plant.confidence,
+      description: plant.description || undefined,
+      careInfo: plant.care_info ? plant.care_info.map(ci => ci.info) : undefined,
+      imageUrl: plant.image_url,
+      timestamp: plant.created_at
+    }));
+  } catch (error) {
+    console.error('Error fetching plant history:', error);
+    return [];
+  }
+}
+
+export async function deletePlant(id: string): Promise<void> {
+  try {
+    const { error } = await supabase
+      .from('plants')
+      .delete()
+      .eq('id', id);
+      
+    if (error) {
+      console.error('Error deleting plant:', error);
+      throw new Error('Failed to delete plant');
+    }
+  } catch (error) {
+    console.error('Error deleting plant:', error);
+    throw new Error('Failed to delete plant');
   }
 }
 
