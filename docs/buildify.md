@@ -25,7 +25,7 @@
 - [x] UI components and styling
 
 ### In Progress
-- [ ] Home page visual enhancements
+- [ ] Visual Design System Updates - Plant-themed gradients, animations, and enhanced color tokens
 
 ### Pending
 - [ ] Enhanced error handling
@@ -41,41 +41,58 @@ Current home page has basic structure with:
 - Static design with minimal visual appeal
 
 ### Enhancement Plan
-1. **Visual Design System Updates** (150 LOC × 10 = 1,500 tokens)
-   - Add gradient backgrounds and animations to CSS
-   - Create plant-themed color variations
-   - Add smooth transitions and hover effects
+1. **Visual Design System Updates** - CURRENT TASK
+   - **Subtask 1.1: Enhanced Color Tokens**
+     - Expand green palette with forest, sage, mint, and emerald variations
+     - Add nature-inspired accent colors (earth tones, sky blues)
+     - Create contextual tokens for success, growth, and vitality states
+   
+   - **Subtask 1.2: Plant-Themed Gradients**
+     - Define leaf-inspired linear gradients (light to dark green)
+     - Create radial gradients for organic, natural effects
+     - Add sunset/sunrise gradients for hero backgrounds
+     - Implement subtle texture gradients for depth
+   
+   - **Subtask 1.3: Animation Foundations**
+     - CSS keyframes for growing/blooming effects
+     - Floating and swaying animations for organic movement
+     - Smooth transitions for hover states and interactions
+     - Pulse animations for call-to-action elements
+   
+   - **Subtask 1.4: Enhanced Shadows & Effects**
+     - Organic shadow variations with green tints
+     - Glow effects for interactive elements
+     - Depth layers for card components
+     - Soft, natural border radius variations
 
-2. **Hero Section Enhancement** (100 LOC × 10 = 1,000 tokens)
+2. **Hero Section Enhancement** - NEXT
    - Add background gradient or plant imagery
    - Implement animated elements (floating leaves, growing animations)
    - Enhanced typography with better visual hierarchy
    - Add statistics or social proof elements
 
-3. **Interactive Feature Cards** (120 LOC × 10 = 1,200 tokens)
+3. **Interactive Feature Cards** - PENDING
    - Add hover animations and micro-interactions
    - Include plant imagery or icons
    - Implement card depth with shadows and gradients
    - Add progress indicators or visual cues
 
-4. **Additional Sections** (200 LOC × 10 = 2,000 tokens)
+4. **Additional Sections** - PENDING
    - Plant gallery/showcase section
    - Testimonials or success stories
    - Plant care tips preview
    - Newsletter signup or community features
 
-5. **Animation System** (80 LOC × 10 = 800 tokens)
+5. **Animation System** - PENDING
    - Implement scroll-triggered animations
    - Add loading animations for better UX
    - Create plant-themed micro-animations
 
-**Total Estimated Cost: 6,500 tokens**
-
 **Execution Strategy:**
-- Start with design system enhancements for consistent theming
-- Focus on hero section for immediate visual impact
-- Add interactive elements progressively
-- Implement animations last for polish
+- Complete all design system subtasks before moving to components
+- Test color contrast and accessibility with new tokens
+- Validate gradient performance across devices
+- Ensure animation performance is smooth on mobile
 
 ## Discussions
 - Using Supabase for backend services
