@@ -5,65 +5,355 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 142.1 76.2% 36.3%;
-
+    /* Colores base expandidos con temática de plantas */
+    --background: 248 250 252; /* Blanco natural */
+    --foreground: 15 23 42; /* Gris carbón oscuro */
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+    --popover: 255 255 255;
+    --popover-foreground: 15 23 42;
+    
+    /* Paleta de verdes expandida */
+    --primary: 34 197 94; /* Verde vibrante */
+    --primary-foreground: 255 255 255;
+    --primary-light: 74 222 128; /* Verde claro */
+    --primary-dark: 21 128 61; /* Verde bosque */
+    
+    /* Verdes naturales adicionales */
+    --forest: 22 101 52; /* Verde bosque profundo */
+    --forest-foreground: 255 255 255;
+    --sage: 132 204 22; /* Verde salvia */
+    --sage-foreground: 255 255 255;
+    --mint: 16 185 129; /* Verde menta */
+    --mint-foreground: 255 255 255;
+    --emerald: 5 150 105; /* Verde esmeralda */
+    --emerald-foreground: 255 255 255;
+    
+    /* Colores de acento inspirados en la naturaleza */
+    --earth: 120 113 108; /* Tierra */
+    --earth-foreground: 255 255 255;
+    --sky: 14 165 233; /* Azul cielo */
+    --sky-foreground: 255 255 255;
+    --sunset: 251 146 60; /* Naranja atardecer */
+    --sunset-foreground: 255 255 255;
+    --bark: 92 64 51; /* Marrón corteza */
+    --bark-foreground: 255 255 255;
+    
+    /* Estados contextuales */
+    --success: 34 197 94; /* Verde éxito */
+    --success-foreground: 255 255 255;
+    --growth: 74 222 128; /* Verde crecimiento */
+    --growth-foreground: 15 23 42;
+    --vitality: 16 185 129; /* Verde vitalidad */
+    --vitality-foreground: 255 255 255;
+    
+    /* Colores del sistema */
+    --secondary: 241 245 249;
+    --secondary-foreground: 15 23 42;
+    --muted: 248 250 252;
+    --muted-foreground: 100 116 139;
+    --accent: 241 245 249;
+    --accent-foreground: 15 23 42;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+    --border: 226 232 240;
+    --input: 226 232 240;
+    --ring: 34 197 94;
     --radius: 0.5rem;
+    
+    /* Gradientes temáticos */
+    --gradient-leaf: linear-gradient(135deg, hsl(var(--mint)) 0%, hsl(var(--forest)) 100%);
+    --gradient-forest: linear-gradient(180deg, hsl(var(--sage)) 0%, hsl(var(--primary-dark)) 50%, hsl(var(--forest)) 100%);
+    --gradient-sunrise: linear-gradient(45deg, hsl(var(--sunset)) 0%, hsl(var(--primary)) 50%, hsl(var(--sky)) 100%);
+    --gradient-organic: radial-gradient(ellipse at center, hsl(var(--primary-light)) 0%, hsl(var(--primary)) 70%);
+    --gradient-earth: linear-gradient(135deg, hsl(var(--earth)) 0%, hsl(var(--bark)) 100%);
+    --gradient-growth: linear-gradient(90deg, hsl(var(--growth)) 0%, hsl(var(--vitality)) 100%);
+    
+    /* Sombras orgánicas */
+    --shadow-soft: 0 1px 3px 0 rgba(34, 197, 94, 0.1), 0 1px 2px 0 rgba(34, 197, 94, 0.06);
+    --shadow-medium: 0 4px 6px -1px rgba(34, 197, 94, 0.1), 0 2px 4px -1px rgba(34, 197, 94, 0.06);
+    --shadow-large: 0 10px 15px -3px rgba(34, 197, 94, 0.1), 0 4px 6px -2px rgba(34, 197, 94, 0.05);
+    --shadow-glow: 0 0 20px rgba(34, 197, 94, 0.3);
+    
+    /* Efectos de profundidad */
+    --depth-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    --depth-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    --depth-3: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 15 23 42; /* Azul oscuro natural */
+    --foreground: 248 250 252;
+    --card: 30 41 59;
+    --card-foreground: 248 250 252;
+    --popover: 30 41 59;
+    --popover-foreground: 248 250 252;
+    
+    /* Verdes ajustados para modo oscuro */
+    --primary: 74 222 128; /* Verde más claro para contraste */
+    --primary-foreground: 15 23 42;
+    --primary-light: 134 239 172;
+    --primary-dark: 34 197 94;
+    
+    --forest: 74 222 128;
+    --forest-foreground: 15 23 42;
+    --sage: 163 230 53;
+    --sage-foreground: 15 23 42;
+    --mint: 52 211 153;
+    --mint-foreground: 15 23 42;
+    --emerald: 16 185 129;
+    --emerald-foreground: 15 23 42;
+    
+    /* Acentos ajustados */
+    --earth: 168 162 158;
+    --earth-foreground: 15 23 42;
+    --sky: 56 189 248;
+    --sky-foreground: 15 23 42;
+    --sunset: 251 191 36;
+    --sunset-foreground: 15 23 42;
+    --bark: 168 162 158;
+    --bark-foreground: 15 23 42;
+    
+    --success: 74 222 128;
+    --success-foreground: 15 23 42;
+    --growth: 134 239 172;
+    --growth-foreground: 15 23 42;
+    --vitality: 52 211 153;
+    --vitality-foreground: 15 23 42;
+    
+    --secondary: 51 65 85;
+    --secondary-foreground: 248 250 252;
+    --muted: 51 65 85;
+    --muted-foreground: 148 163 184;
+    --accent: 51 65 85;
+    --accent-foreground: 248 250 252;
+    --destructive: 248 113 113;
+    --destructive-foreground: 15 23 42;
+    --border: 51 65 85;
+    --input: 51 65 85;
+    --ring: 74 222 128;
+    
+    /* Gradientes para modo oscuro */
+    --gradient-leaf: linear-gradient(135deg, hsl(var(--mint)) 0%, hsl(var(--forest)) 100%);
+    --gradient-forest: linear-gradient(180deg, hsl(var(--sage)) 0%, hsl(var(--primary)) 50%, hsl(var(--emerald)) 100%);
+    --gradient-sunrise: linear-gradient(45deg, hsl(var(--sunset)) 0%, hsl(var(--primary)) 50%, hsl(var(--sky)) 100%);
+    --gradient-organic: radial-gradient(ellipse at center, hsl(var(--primary)) 0%, hsl(var(--emerald)) 70%);
+    --gradient-earth: linear-gradient(135deg, hsl(var(--earth)) 0%, hsl(var(--bark)) 100%);
+    --gradient-growth: linear-gradient(90deg, hsl(var(--growth)) 0%, hsl(var(--vitality)) 100%);
+    
+    /* Sombras ajustadas para modo oscuro */
+    --shadow-soft: 0 1px 3px 0 rgba(74, 222, 128, 0.2), 0 1px 2px 0 rgba(74, 222, 128, 0.12);
+    --shadow-medium: 0 4px 6px -1px rgba(74, 222, 128, 0.2), 0 2px 4px -1px rgba(74, 222, 128, 0.12);
+    --shadow-large: 0 10px 15px -3px rgba(74, 222, 128, 0.2), 0 4px 6px -2px rgba(74, 222, 128, 0.1);
+    --shadow-glow: 0 0 20px rgba(74, 222, 128, 0.4);
+  }
+}
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+/* Animaciones con temática de plantas */
+@keyframes grow {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+@keyframes bloom {
+  0% {
+    transform: scale(0.3) rotate(-5deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(2deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
 
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
+@keyframes sway {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(2px) rotate(1deg);
+  }
+}
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: var(--shadow-soft);
+  }
+  50% {
+    box-shadow: var(--shadow-glow);
+  }
+}
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+@keyframes leaf-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+@keyframes sprout {
+  0% {
+    transform: translateY(20px) scaleY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(10px) scaleY(0.5);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+  }
+}
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 142.1 76.2% 36.3%;
+/* Clases de utilidad para animaciones */
+@layer utilities {
+  .animate-grow {
+    animation: grow 0.6s ease-out;
+  }
+  
+  .animate-bloom {
+    animation: bloom 1.2s ease-out;
+  }
+  
+  .animate-sway {
+    animation: sway 3s ease-in-out infinite;
+  }
+  
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .animate-leaf-fall {
+    animation: leaf-fall 8s linear infinite;
+  }
+  
+  .animate-sprout {
+    animation: sprout 1s ease-out;
+  }
+  
+  /* Gradientes como clases de utilidad */
+  .bg-gradient-leaf {
+    background: var(--gradient-leaf);
+  }
+  
+  .bg-gradient-forest {
+    background: var(--gradient-forest);
+  }
+  
+  .bg-gradient-sunrise {
+    background: var(--gradient-sunrise);
+  }
+  
+  .bg-gradient-organic {
+    background: var(--gradient-organic);
+  }
+  
+  .bg-gradient-earth {
+    background: var(--gradient-earth);
+  }
+  
+  .bg-gradient-growth {
+    background: var(--gradient-growth);
+  }
+  
+  /* Sombras orgánicas */
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .shadow-large {
+    box-shadow: var(--shadow-large);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .shadow-depth-1 {
+    box-shadow: var(--depth-1);
+  }
+  
+  .shadow-depth-2 {
+    box-shadow: var(--depth-2);
+  }
+  
+  .shadow-depth-3 {
+    box-shadow: var(--depth-3);
+  }
+  
+  /* Transiciones suaves */
+  .transition-organic {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .transition-grow {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .transition-glow {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  /* Efectos hover orgánicos */
+  .hover-grow:hover {
+    transform: scale(1.05);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-large);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Bordes orgánicos */
+  .rounded-organic {
+    border-radius: 1rem 0.5rem 1rem 0.5rem;
+  }
+  
+  .rounded-leaf {
+    border-radius: 50% 0 50% 0;
+  }
+  
+  .rounded-petal {
+    border-radius: 100% 0 100% 0;
   }
 }
 
@@ -71,7 +361,26 @@
   * {
     @apply border-border;
   }
+  
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Scrollbar personalizado con temática de plantas */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-dark;
   }
 }
