@@ -1,0 +1,136 @@
+/* Enhanced Color Tokens */
+:root {
+  /* Base */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+
+  --primary: 142 71% 45%; /* emerald */
+  --primary-foreground: 0 0% 100%;
+  --primary-light: 142 71% 55%;
+  --primary-dark: 142 71% 36%;
+
+  --secondary: 150 9% 96%;
+  --secondary-foreground: 222 47% 11%;
+
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 44%;
+
+  --accent: 160 84% 39%; /* mint */
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 142 71% 45%;
+
+  --radius: 0.75rem;
+
+  /* Plant theme palettes */
+  --forest: 142 72% 30%;
+  --forest-foreground: 0 0% 100%;
+
+  --sage: 140 15% 90%;
+  --sage-foreground: 140 20% 25%;
+
+  --mint: 157 58% 75%;
+  --mint-foreground: 161 33% 20%;
+
+  --emerald: 142 64% 40%;
+  --emerald-foreground: 0 0% 100%;
+
+  /* Accents */
+  --earth: 25 45% 45%;
+  --earth-foreground: 0 0% 100%;
+
+  --sky: 204 90% 52%;
+  --sky-foreground: 0 0% 100%;
+
+  --sunset: 14 90% 60%;
+  --sunset-foreground: 0 0% 100%;
+
+  --bark: 24 16% 24%;
+  --bark-foreground: 0 0% 100%;
+
+  /* Contextual */
+  --success: 142 72% 35%;
+  --success-foreground: 0 0% 100%;
+
+  --growth: 120 60% 38%;
+  --growth-foreground: 0 0% 100%;
+
+  --vitality: 150 70% 45%;
+  --vitality-foreground: 0 0% 100%;
+}
+
+.dark {
+  --background: 222 47% 7%;
+  --foreground: 210 40% 98%;
+
+  --card: 222 47% 9%;
+  --card-foreground: 210 40% 98%;
+
+  --popover: 222 47% 9%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 142 64% 45%;
+  --primary-foreground: 0 0% 100%;
+  --primary-light: 142 64% 52%;
+  --primary-dark: 142 64% 36%;
+
+  --secondary: 140 10% 18%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 215 15% 14%;
+  --muted-foreground: 215 20% 65%;
+
+  --accent: 160 70% 40%;
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 62% 40%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 217 19% 27%;
+  --input: 217 19% 27%;
+  --ring: 142 64% 45%;
+
+  --forest: 142 40% 22%;
+  --forest-foreground: 210 40% 98%;
+
+  --sage: 140 8% 24%;
+  --sage-foreground: 210 40% 98%;
+
+  --mint: 157 44% 30%;
+  --mint-foreground: 210 40% 98%;
+
+  --emerald: 142 52% 33%;
+  --emerald-foreground: 210 40% 98%;
+
+  --earth: 25 35% 34%;
+  --earth-foreground: 210 40% 98%;
+
+  --sky: 204 80% 50%;
+  --sky-foreground: 210 40% 98%;
+
+  --sunset: 14 80% 55%;
+  --sunset-foreground: 210 40% 98%;
+
+  --bark: 24 12% 16%;
+  --bark-foreground: 210 40% 98%;
+
+  --success: 142 60% 32%;
+  --success-foreground: 210 40% 98%;
+
+  --growth: 120 55% 34%;
+  --growth-foreground: 210 40% 98%;
+
+  --vitality: 150 60% 40%;
+  --vitality-foreground: 210 40% 98%;
+}
