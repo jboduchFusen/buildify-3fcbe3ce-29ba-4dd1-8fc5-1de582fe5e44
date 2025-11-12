@@ -36,7 +36,7 @@ const HomePage = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mt-4 animate-grow">
             <Link to="/identify">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-large hover:shadow-glow transition-all hover:scale-105">
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-large hover:shadow-glow transition-all hover:scale-105">
                 <Camera className="mr-2 h-5 w-5" />
                 Start Identifying
               </Button>
@@ -246,7 +246,7 @@ const HomePage = () => {
             Join thousands of plant enthusiasts discovering and learning about plants every day
           </p>
           <Link to="/identify">
-            <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-large hover:shadow-glow transition-all hover:scale-105 mt-4">
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-large hover:shadow-glow transition-all hover:scale-105 mt-4">
               <Camera className="mr-2 h-5 w-5" />
               Get Started Now
             </Button>

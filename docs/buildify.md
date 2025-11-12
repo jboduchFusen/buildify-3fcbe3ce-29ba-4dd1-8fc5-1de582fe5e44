@@ -79,15 +79,19 @@
    - Add export functionality (CSV/PDF)
    - Include statistics and insights
 
-7. **Text Contrast & Visual Hierarchy Improvements** (Est: 80 LOC × 10 = 800 tokens)
+7. **Text Contrast & Visual Hierarchy Improvements** (Est: 120 LOC × 10 = 1200 tokens)
    - [x] Subtask 7.1: Fix hardcoded colors in AboutPage
      - Replace `text-green-600` with semantic tokens
      - Ensure proper contrast for icon colors
-   - [ ] Subtask 7.2: Enhance IdentificationPage placeholder
+   - [x] Subtask 7.2: Fix HomePage button contrast issues
+     - Change white buttons with green text to use proper contrast
+     - Use dark text on light buttons or light text on dark buttons
+     - Ensure all CTA buttons are readable
+   - [ ] Subtask 7.3: Enhance IdentificationPage placeholder
      - Add subtle background to "No Plant Identified Yet" section
      - Improve visual hierarchy with better spacing
      - Add gradient or pattern background
-   - [ ] Subtask 7.3: Improve LoginPage visual appeal
+   - [ ] Subtask 7.4: Improve LoginPage visual appeal
      - Add subtle background gradient to page
      - Enhance card shadow and depth
      - Improve form field focus states

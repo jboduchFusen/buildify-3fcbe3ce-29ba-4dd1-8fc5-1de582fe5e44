@@ -17,7 +17,7 @@ const AboutPage = () => {
           <CardContent className="p-6">
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3">
-                <Leaf className="h-8 w-8 text-green-600" />
+                <Leaf className="h-8 w-8 text-primary" />
                 <h2 className="text-2xl font-bold">Our Mission</h2>
               </div>
               <p>
@@ -37,7 +37,7 @@ const AboutPage = () => {
           <CardContent className="p-6">
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3">
-                <Camera className="h-8 w-8 text-green-600" />
+                <Camera className="h-8 w-8 text-primary" />
                 <h2 className="text-2xl font-bold">How It Works</h2>
               </div>
               <p>
@@ -59,7 +59,7 @@ const AboutPage = () => {
         <CardContent className="p-6">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <Info className="h-8 w-8 text-green-600" />
+              <Info className="h-8 w-8 text-primary" />
               <h2 className="text-2xl font-bold">Tips for Better Identification</h2>
             </div>
             <ul className="list-disc pl-6 space-y-2">
@@ -87,7 +87,7 @@ const AboutPage = () => {
         <CardContent className="p-6">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <Database className="h-8 w-8 text-green-600" />
+              <Database className="h-8 w-8 text-primary" />
               <h2 className="text-2xl font-bold">Privacy & Data</h2>
             </div>
             <p>
