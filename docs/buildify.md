@@ -1,3 +1,4 @@
+
 # Plant Identification App - Planning Document
 
 ## Requirements
@@ -6,99 +7,105 @@
 - History tracking of identified plants
 - Clean, responsive UI with plant/nature theme
 - Supabase backend integration
-- Enhanced home page with visual appeal and engagement
+- Real Plant.id API integration
 
 ## Design
 - Green color scheme appropriate for plant identification
 - Card-based layout for plant results
 - Mobile-responsive design
 - Clean typography and spacing
-- Enhanced home page with animations, gradients, and visual elements
+- Modern home page with animations, gradients, and visual elements
 
 ## Tasks
+
 ### Completed
 - [x] Basic React app structure with routing
 - [x] Authentication system with Supabase
-- [x] Plant identification page with photo upload
-- [x] History page for tracking identifications
 - [x] Database schema and security policies
 - [x] UI components and styling
+- [x] Visual Design System - Plant-themed gradients, animations, and enhanced color tokens
+- [x] Hero Section Enhancement - Modern home page with animations and visual appeal
 
-### Completed
-- [x] Visual Design System Updates - Plant-themed gradients, animations, and enhanced color tokens
-
-### In Progress
-- [ ] Hero Section Enhancement
-
-### Pending
-- [ ] Enhanced error handling
-- [ ] Loading states optimization
-- [ ] Performance improvements
-
-## Current Task: Home Page Enhancement
-### Analysis
-Current home page has basic structure with:
-- Hero section with title and CTA
-- Feature cards (3-column grid)
-- How it works section (2-column grid)
-- Static design with minimal visual appeal
-
-### Enhancement Plan
-1. **Visual Design System Updates** - CURRENT TASK
-   - [x] Subtask 1.1: Enhanced Color Tokens - Completed
-     - Expand green palette with forest, sage, mint, and emerald variations
-     - Add nature-inspired accent colors (earth tones, sky blues)
-     - Create contextual tokens for success, growth, and vitality states
+### High Priority - Core Functionality
+1. **Real Plant.id API Integration** (Est: 200 LOC × 10 = 2000 tokens)
+   - Replace mock identification with actual Plant.id API calls
+   - Implement proper error handling for API failures
+   - Add retry logic for failed requests
+   - Handle rate limiting and API quotas
    
-   - **Subtask 1.2: Plant-Themed Gradients**
-     - Define leaf-inspired linear gradients (light to dark green)
-     - Create radial gradients for organic, natural effects
-     - Add sunset/sunrise gradients for hero backgrounds
-     - Implement subtle texture gradients for depth
-   
-   - **Subtask 1.3: Animation Foundations**
-     - CSS keyframes for growing/blooming effects
-     - Floating and swaying animations for organic movement
-     - Smooth transitions for hover states and interactions
-     - Pulse animations for call-to-action elements
-   
-   - **Subtask 1.4: Enhanced Shadows & Effects**
-     - Organic shadow variations with green tints
-     - Glow effects for interactive elements
-     - Depth layers for card components
-     - Soft, natural border radius variations
+2. **Supabase Storage Setup** (Est: 100 LOC × 10 = 1000 tokens)
+   - Create 'plant-images' storage bucket
+   - Configure bucket policies for authenticated users
+   - Implement image upload with progress tracking
+   - Add image optimization before upload
 
-2. **Hero Section Enhancement** - NEXT
-   - Add background gradient or plant imagery
-   - Implement animated elements (floating leaves, growing animations)
-   - Enhanced typography with better visual hierarchy
-   - Add statistics or social proof elements
+3. **API Key Management** (Est: 150 LOC × 10 = 1500 tokens)
+   - Store API key securely in Supabase secrets
+   - Create edge function to proxy Plant.id API calls
+   - Remove client-side API key input requirement
+   - Implement usage tracking and limits
 
-3. **Interactive Feature Cards** - PENDING
-   - Add hover animations and micro-interactions
-   - Include plant imagery or icons
-   - Implement card depth with shadows and gradients
-   - Add progress indicators or visual cues
+### Medium Priority - UX Improvements
+4. **Enhanced Loading States** (Est: 120 LOC × 10 = 1200 tokens)
+   - Add skeleton loaders for identification results
+   - Implement progress indicators for image upload
+   - Add animated transitions between states
+   - Show processing steps during identification
 
-4. **Additional Sections** - PENDING
-   - Plant gallery/showcase section
-   - Testimonials or success stories
-   - Plant care tips preview
-   - Newsletter signup or community features
+5. **Error Handling & Validation** (Est: 150 LOC × 10 = 1500 tokens)
+   - Add comprehensive error messages
+   - Implement image validation (size, format, quality)
+   - Add fallback UI for failed identifications
+   - Create user-friendly error recovery flows
 
-5. **Animation System** - PENDING
-   - Implement scroll-triggered animations
-   - Add loading animations for better UX
-   - Create plant-themed micro-animations
+6. **History Page Enhancements** (Est: 180 LOC × 10 = 1800 tokens)
+   - Add search and filter functionality
+   - Implement pagination for large histories
+   - Add export functionality (CSV/PDF)
+   - Include statistics and insights
 
-**Execution Strategy:**
-- Complete all design system subtasks before moving to components
-- Test color contrast and accessibility with new tokens
-- Validate gradient performance across devices
-- Ensure animation performance is smooth on mobile
+### Low Priority - Polish & Features
+7. **Performance Optimizations** (Est: 100 LOC × 10 = 1000 tokens)
+   - Implement image lazy loading
+   - Add React.memo to prevent unnecessary re-renders
+   - Optimize bundle size with code splitting
+   - Add service worker for offline support
+
+8. **Additional Features** (Est: 250 LOC × 10 = 2500 tokens)
+   - Plant care reminders and notifications
+   - Social sharing of plant identifications
+   - Plant collection organization (folders/tags)
+   - Community features (share discoveries)
+
+## Execution Strategy
+
+**Immediate Next Steps:**
+1. Set up Supabase storage bucket for plant images
+2. Implement Plant.id API integration via edge function
+3. Add proper error handling throughout the app
+
+**Phase 1: Core Functionality** (Tasks 1-3)
+- Focus on making the plant identification actually work
+- Ensure data persistence and security
+- Remove dependency on user-provided API keys
+
+**Phase 2: UX Polish** (Tasks 4-6)
+- Improve user experience with better feedback
+- Add features that make the app more useful
+- Enhance the history and tracking capabilities
+
+**Phase 3: Advanced Features** (Tasks 7-8)
+- Optimize performance for production
+- Add nice-to-have features based on user feedback
+
+## Technical Decisions
+- Using Supabase edge functions to secure API keys
+- Implementing image optimization to reduce storage costs
+- Using React Query for better data fetching and caching
+- Implementing proper TypeScript types throughout
 
 ## Discussions
-- Using Supabase for backend services
-- Implementing proper security with RLS policies
-- Clean component architecture with TypeScript
-- Home page needs more visual appeal and engagement to attract users
+- Plant.id API has rate limits - need to implement usage tracking
+- Consider adding multiple plant identification services as fallbacks
+- May need to implement image compression before upload
+- Should add analytics to track identification accuracy and user behavior
