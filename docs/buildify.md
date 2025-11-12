@@ -8,6 +8,7 @@
 - Clean, responsive UI with plant/nature theme
 - Supabase backend integration
 - Real Plant.id API integration
+- Improved text contrast and readability across all pages
 
 ## Design
 - Green color scheme appropriate for plant identification
@@ -15,6 +16,8 @@
 - Mobile-responsive design
 - Clean typography and spacing
 - Modern home page with animations, gradients, and visual elements
+- Semantic design tokens for consistent theming
+- Enhanced text contrast with appropriate backgrounds
 
 ## Tasks
 
@@ -76,14 +79,27 @@
    - Add export functionality (CSV/PDF)
    - Include statistics and insights
 
+7. **Text Contrast & Visual Hierarchy Improvements** (Est: 80 LOC × 10 = 800 tokens)
+   - [x] Subtask 7.1: Fix hardcoded colors in AboutPage
+     - Replace `text-green-600` with semantic tokens
+     - Ensure proper contrast for icon colors
+   - [ ] Subtask 7.2: Enhance IdentificationPage placeholder
+     - Add subtle background to "No Plant Identified Yet" section
+     - Improve visual hierarchy with better spacing
+     - Add gradient or pattern background
+   - [ ] Subtask 7.3: Improve LoginPage visual appeal
+     - Add subtle background gradient to page
+     - Enhance card shadow and depth
+     - Improve form field focus states
+
 ### Low Priority - Polish & Features
-7. **Performance Optimizations** (Est: 100 LOC × 10 = 1000 tokens)
+8. **Performance Optimizations** (Est: 100 LOC × 10 = 1000 tokens)
    - Implement image lazy loading
    - Add React.memo to prevent unnecessary re-renders
    - Optimize bundle size with code splitting
    - Add service worker for offline support
 
-8. **Additional Features** (Est: 250 LOC × 10 = 2500 tokens)
+9. **Additional Features** (Est: 250 LOC × 10 = 2500 tokens)
    - Plant care reminders and notifications
    - Social sharing of plant identifications
    - Plant collection organization (folders/tags)
@@ -92,21 +108,23 @@
 ## Execution Strategy
 
 **Immediate Next Steps:**
-1. Set up Supabase storage bucket for plant images
-2. Implement Plant.id API integration via edge function
-3. Add proper error handling throughout the app
+1. **Fix text contrast issues** - Replace hardcoded colors with semantic tokens, add backgrounds where needed
+2. Set up Supabase storage bucket for plant images
+3. Implement Plant.id API integration via edge function
+4. Add proper error handling throughout the app
 
 **Phase 1: Core Functionality** (Tasks 1-3)
 - Focus on making the plant identification actually work
 - Ensure data persistence and security
 - Remove dependency on user-provided API keys
 
-**Phase 2: UX Polish** (Tasks 4-6)
+**Phase 2: UX Polish** (Tasks 4-7)
 - Improve user experience with better feedback
 - Add features that make the app more useful
 - Enhance the history and tracking capabilities
+- Fix visual hierarchy and text contrast issues
 
-**Phase 3: Advanced Features** (Tasks 7-8)
+**Phase 3: Advanced Features** (Tasks 8-9)
 - Optimize performance for production
 - Add nice-to-have features based on user feedback
 
@@ -115,9 +133,15 @@
 - Implementing image optimization to reduce storage costs
 - Using React Query for better data fetching and caching
 - Implementing proper TypeScript types throughout
+- **Design System First**: All colors must use semantic tokens from design system
+- Never use hardcoded colors like `text-green-600`, always use semantic tokens
 
 ## Discussions
 - Plant.id API has rate limits - need to implement usage tracking
 - Consider adding multiple plant identification services as fallbacks
 - May need to implement image compression before upload
 - Should add analytics to track identification accuracy and user behavior
+- **Text Contrast**: Need to ensure all text has sufficient contrast against backgrounds
+  - AboutPage uses hardcoded `text-green-600` - should use `text-primary` or similar
+  - IdentificationPage placeholder could use a subtle background for better visual separation
+  - LoginPage could benefit from a gradient background to make the form stand out
