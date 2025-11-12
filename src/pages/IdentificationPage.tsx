@@ -1,11 +1,12 @@
 
 import { useState, useRef } from 'react';
-import { Camera, Upload, Loader2, X } from 'lucide-react';
+import { Camera, Upload, Loader2, X, Leaf } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { toast } from 'sonner';
 import { PlantIdentification } from '../types';
 import { identifyPlant } from '../services/plantService';
+import { PlantResultSkeleton } from '../components/PlantResultSkeleton';
 
 const IdentificationPage = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -186,8 +187,10 @@ const IdentificationPage = () => {
         </div>
 
         <div>
-          {result ? (
-            <Card>
+          {loading ? (
+            <PlantResultSkeleton />
+          ) : result ? (
+            <Card className="animate-grow">
               <CardContent className="p-6">
                 <h2 className="text-2xl font-bold mb-4">{result.plantName}</h2>
                 <div className="flex flex-col gap-4">

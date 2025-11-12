@@ -47,10 +47,22 @@
 
 ### Medium Priority - UX Improvements
 4. **Enhanced Loading States** (Est: 120 LOC × 10 = 1200 tokens)
-   - Add skeleton loaders for identification results
-   - Implement progress indicators for image upload
-   - Add animated transitions between states
-   - Show processing steps during identification
+   - [x] Subtask 4.1: Create Skeleton Loader Components
+     - Build reusable skeleton components for cards, text, images
+     - Add shimmer animation effect
+     - Create plant result skeleton layout
+   - [ ] Subtask 4.2: Image Upload Progress Indicator
+     - Add progress bar for image upload
+     - Show upload percentage
+     - Display file size and upload speed
+   - [ ] Subtask 4.3: Multi-Step Processing Indicator
+     - Create step-by-step progress component
+     - Show current processing stage (uploading, analyzing, fetching data)
+     - Add estimated time remaining
+   - [ ] Subtask 4.4: History Page Loading States
+     - Add skeleton loaders for plant cards grid
+     - Implement loading state for delete operations
+     - Add optimistic UI updates
 
 5. **Error Handling & Validation** (Est: 150 LOC × 10 = 1500 tokens)
    - Add comprehensive error messages

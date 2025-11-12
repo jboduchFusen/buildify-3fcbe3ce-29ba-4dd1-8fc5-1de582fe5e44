@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Link } from 'react-router-dom';
 import { getPlantHistory, deletePlant } from '../services/plantService';
 import { toast } from 'sonner';
+import { PlantCardSkeleton } from '../components/PlantCardSkeleton';
 
 const HistoryPage = () => {
   const [history, setHistory] = useState<PlantIdentification[]>([]);
@@ -16,6 +17,7 @@ const HistoryPage = () => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   useEffect(() => {
     loadHistory();
@@ -47,6 +49,7 @@ const HistoryPage = () => {
 
   const confirmDelete = async () => {
     if (deleteId) {
+      setDeleting(deleteId);
       try {
         await deletePlant(deleteId);
         setHistory(history.filter(item => item.id !== deleteId));
@@ -56,6 +59,8 @@ const HistoryPage = () => {
       } catch (error) {
         console.error('Error deleting plant:', error);
         toast.error('Failed to delete plant');
+      } finally {
+        setDeleting(null);
       }
     }
   };
@@ -77,9 +82,21 @@ const HistoryPage = () => {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center h-[50vh]">
-        <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
-        <p>Loading your plant history...</p>
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">Identification History</h1>
+            <p className="text-muted-foreground">
+              View all your previous plant identifications
+            </p>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <PlantCardSkeleton key={i} />
+          ))}
+        </div>
       </div>
     );
   }
@@ -124,7 +141,7 @@ const HistoryPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredHistory.length > 0 ? (
               filteredHistory.map((item) => (
-                <Card key={item.id} className="overflow-hidden">
+                <Card key={item.id} className="overflow-hidden animate-grow">
                   <div className="relative h-48">
                     <img 
                       src={item.imageUrl} 
@@ -139,8 +156,13 @@ const HistoryPage = () => {
                         e.stopPropagation();
                         handleDelete(item.id);
                       }}
+                      disabled={deleting === item.id}
                     >
-                      <Trash2 className="h-4 w-4" />
+                      {deleting === item.id ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Trash2 className="h-4 w-4" />
+                      )}
                     </Button>
                   </div>
                   <CardContent className="p-4">
@@ -257,8 +279,16 @@ const HistoryPage = () => {
             <Button 
               variant="destructive" 
               onClick={deleteId ? confirmDelete : clearAllHistory}
+              disabled={!!deleting}
             >
-              {deleteId ? "Delete" : "Clear All"}
+              {deleting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Deleting...
+                </>
+              ) : (
+                deleteId ? "Delete" : "Clear All"
+              )}
             </Button>
           </DialogFooter>
         </DialogContent>
