@@ -8,6 +8,9 @@ const HomePage = () => {
     <div className="flex flex-col">
       {/* Hero Section with Gradient Background */}
       <section className="relative overflow-hidden bg-gradient-sunrise py-20 px-4">
+        {/* Dark overlay for better text contrast */}
+        <div className="absolute inset-0 bg-black/30"></div>
+        
         {/* Animated Background Elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 bg-forest rounded-full blur-3xl animate-float"></div>

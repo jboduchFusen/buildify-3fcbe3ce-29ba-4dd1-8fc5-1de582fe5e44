@@ -87,11 +87,15 @@
      - Change white buttons with green text to use proper contrast
      - Use dark text on light buttons or light text on dark buttons
      - Ensure all CTA buttons are readable
-   - [ ] Subtask 7.3: Enhance IdentificationPage placeholder
+   - [x] Subtask 7.3: Improve HomePage hero text readability
+     - Add dark semi-transparent overlay (bg-black/30) to hero section
+     - Ensures white text is readable against gradient background
+     - Maintains visual appeal while improving accessibility
+   - [ ] Subtask 7.4: Enhance IdentificationPage placeholder
      - Add subtle background to "No Plant Identified Yet" section
      - Improve visual hierarchy with better spacing
      - Add gradient or pattern background
-   - [ ] Subtask 7.4: Improve LoginPage visual appeal
+   - [ ] Subtask 7.5: Improve LoginPage visual appeal
      - Add subtle background gradient to page
      - Enhance card shadow and depth
      - Improve form field focus states
